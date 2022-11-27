@@ -23,6 +23,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'django_rest.urls'
 
+REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

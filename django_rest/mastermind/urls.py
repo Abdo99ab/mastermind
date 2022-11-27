@@ -1,5 +1,6 @@
 from django.urls import path, include
 from rest_framework_nested import routers
+from rest_framework.documentation import include_docs_urls
 from mastermind.views import *
 
 # Create default router
@@ -16,4 +17,5 @@ urlpatterns = [
     path('statuses/', StatusView.as_view(), name="statuses"),
     # Create game state path to show customized result for a given game
     path('game-state/<int:pk>/', GameStateView.as_view(),name="game-state"),
+    path('docs/', include_docs_urls(title='Mastermind REST'))
 ]
