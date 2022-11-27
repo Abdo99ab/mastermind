@@ -101,5 +101,10 @@ def addGuess(pk):
             return jsonify({"game":game.get('id'),"guess":new_id,"data":{"sequence":sequence}}), 201
     return jsonify({"detail":"Not found."}), 404
 
+def create_app():
+    return app
+
 if __name__ == '__main__':
-    app.run(debug=True, port=4000)
+    # app.run(debug=True, port=4000)
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=8080)
