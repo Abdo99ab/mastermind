@@ -16,6 +16,10 @@ class Game(models.Model):
     guess_limit = models.IntegerField()
     status = models.CharField(default=STATUS_CHOICES[0],max_length=20)
 
+    class Meta:
+        verbose_name = "Game"
+        verbose_name_plural = "Games"
+
     def __str__(self):
         return str(self.id)
 
@@ -43,6 +47,10 @@ class Guess(models.Model):
     sequence = models.CharField(max_length=4)
     black_pegs = models.IntegerField(default=0)
     white_pegs = models.IntegerField(default=0)
+
+    class Meta:
+        verbose_name = "Guess"
+        verbose_name_plural = "Guesses"
 
     def __str__(self):
         return "{}->{}".format(self.game.id, self.id)
