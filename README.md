@@ -1,4 +1,4 @@
-# Mastermind Django Rest API
+# Mastermind Rest API
 This repository contains a REST API for the Mastermind game owned by [Abderrahmane Hammia](mailto:fa_hammia@esi.dz). The project was initially started based on a technical test created by [Inari.io](htttps://inari.io)
 # _Repository content_
 This repository contains two RESTful projects, both developed with Python, one with Django Framework and the other with Flask.
