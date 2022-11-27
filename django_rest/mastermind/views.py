@@ -43,7 +43,7 @@ class GameStateView(APIView):
             game = Game.objects.get(pk=pk)
             return Response(game.parsed())
         except Game.DoesNotExist:
-            return Response({"game":"Game with id {} Does not exist".format(pk)}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail":"Not found."}, status=status.HTTP_404_NOT_FOUND)
 
 # Create game view, to access all games or a given game, and to create a new game
 class GameView(viewsets.ModelViewSet):
@@ -83,7 +83,7 @@ class GuessView(viewsets.ModelViewSet):
                 current_guess=Count("guess")
             ).first()
             if game is None:
-                return Response({"game":"Game with id {} Does not exist".format(game_id)}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"detail":"Not found."}, status=status.HTTP_404_NOT_FOUND)
             # if guess limit reached, the new test can't be accepted we return lost status
             if game.guess_limit - game.current_guess <= 0:
                 if game.status != STATUS_CHOICES[2]:
