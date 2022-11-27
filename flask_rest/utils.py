@@ -1,5 +1,7 @@
 import random
 
+# list to save games
+games = []
 # list of colors Blue, Red, Yellow, Green, White, Orange
 COLORS = ["R","B","Y","G","W","O"]
 # list of status
@@ -30,6 +32,7 @@ def mastermind_algo(secret_sequence, guess_sequence):
                     break
     return b,w
 
+# Parse to getGameState
 def parsed_game_state(game):
     guesses = list(sorted(game.get('guesses'),key=lambda x:x.get('id'),reverse=True))
     if len(guesses) == 0:
@@ -49,6 +52,7 @@ def parsed_game_state(game):
         "current_guess_white_pegs": guesses[0].get('white_pegs'),
     }
 
+# Parse to getGames and getGame
 def parsed_game(game):
     guesses = list(sorted(game.get('guesses'),key=lambda x:x.get('id'),reverse=True))
     return {
@@ -58,6 +62,7 @@ def parsed_game(game):
         "current_guess": len(guesses),
     }
 
+# Parse to getGuesses and getGuess
 def parsed_guess(game,guess):
     return {
         "id":guess.get('id'),
@@ -69,12 +74,14 @@ def parsed_guess(game,guess):
         "white_pegs":guess.get('white_pegs')
     }
 
+# Create the secret sequence with 4 colors
 def create_sequence():
     result = ""
     for _ in range(4):
         result += random.choice(COLORS)
     return result
 
+# Validate guess limit avoid negative or null entries
 def validate_guess_limit(value):
     if value is None:
         return None, {"guess_limit": ["This field is required."]}
@@ -84,6 +91,7 @@ def validate_guess_limit(value):
         return None, {"guess_limit": ["Guess Limit must be positive"]}
     return value, None
 
+# Validate guess sequence avoid different than 4 chacters and charcters not in COLORS
 def validate_sequence(value):
     if value is None:
         return None, {"sequence": ["This field is required."]}

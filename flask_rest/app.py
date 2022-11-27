@@ -1,14 +1,15 @@
 from flask import Flask, jsonify, request
-from games import games
 from utils import *
 
+# Init the app
 app = Flask(__name__)
 
+# Create status view with only get method
 @app.route('/api/v1/statuses/', methods=['GET'])
 def getStatuses():
     return jsonify(STATUS_CHOICES)
 
-# Testing Route
+# Create game state view with only get method to get a given game state
 @app.route('/api/v1/game-state/<int:pk>/', methods=['GET'])
 def getGameState(pk):
     for game in games:
@@ -16,6 +17,7 @@ def getGameState(pk):
             return jsonify(parsed_game_state(game))
     return jsonify({"detail":"Not found."}), 404
 
+# Create game view, to access all games
 @app.route('/api/v1/games/', methods=['GET'])
 def getGames():
     parsed_games = []
@@ -23,6 +25,7 @@ def getGames():
             parsed_games.append(parsed_game(game))
     return jsonify(parsed_games)
 
+# Create game view, to access a given game
 @app.route('/api/v1/games/<int:pk>/', methods=['GET'])
 def getGame(pk):
     for game in games:
@@ -30,6 +33,7 @@ def getGame(pk):
             return jsonify(parsed_game(game))
     return jsonify({"detail":"Not found."}), 404
 
+# Create game view, to create a new game
 @app.route('/api/v1/games/<int:pk>/guesses/', methods=['GET'])
 def getGuesses(pk):
     parsed_guesses = []
@@ -40,6 +44,7 @@ def getGuesses(pk):
             return jsonify(parsed_guesses)
     return jsonify({"detail":"Not found."}), 404
 
+# Create guess view, to access all guesses inside a game
 @app.route('/api/v1/games/<int:pk>/guesses/<int:pk2>/', methods=['GET'])
 def getGuess(pk,pk2):
     for game in games:
@@ -49,6 +54,7 @@ def getGuess(pk,pk2):
                     return jsonify(parsed_guess(game,guess))
     return jsonify({"detail":"Not found."}), 404
 
+# Create guess view, to access a given guess inside a game
 @app.route('/api/v1/games/', methods=['POST'])
 def addGame():
     new_id = list(sorted(games,key=lambda x:x.get('id'),reverse=True))[0].get('id')+1
@@ -65,6 +71,7 @@ def addGame():
     games.append(new_game)
     return jsonify({"game":new_id,"data":{"guess_limit":guess_limit}}), 201
 
+# Create guess view, to create a new guess
 @app.route('/api/v1/games/<int:pk>/guesses/', methods=['POST'])
 def addGuess(pk):
     for game in games:
@@ -101,9 +108,11 @@ def addGuess(pk):
             return jsonify({"game":game.get('id'),"guess":new_id,"data":{"sequence":sequence}}), 201
     return jsonify({"detail":"Not found."}), 404
 
+# to run on production with waitress-serve --call app:create_app
 def create_app():
     return app
 
+# to run on production with python app.py
 if __name__ == '__main__':
     # app.run(debug=True, port=4000)
     from waitress import serve

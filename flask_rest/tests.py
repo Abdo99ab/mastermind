@@ -1,14 +1,17 @@
-from games import games
+from utils import games
 from app import app
 import unittest
 
+# Unit test for status view
 class StatusTest(unittest.TestCase):
     def test_get_status(self):
         tester = app.test_client(self)
         response = tester.get('/api/v1/statuses/')
         self.assertEqual(response.status_code, 200)
 
+# Unit test for game state view
 class GameStateTest(unittest.TestCase):
+    # Create a new game
     @classmethod
     def setUpClass(cls):
         games.append({
@@ -24,7 +27,9 @@ class GameStateTest(unittest.TestCase):
         response = tester.get('/api/v1/game-state/1/')
         self.assertEqual(response.status_code, 200)
     
+# Unit test for game view
 class GameTest(unittest.TestCase):
+    # Create a new game
     @classmethod
     def setUpClass(cls):
         games.append({
@@ -45,6 +50,7 @@ class GameTest(unittest.TestCase):
         response = tester.get('/api/v1/games/1/')
         self.assertEqual(response.status_code, 200)
 
+    # Test create a game correctly
     def test_post_game(self):
         data = {
             "guess_limit": 1,
@@ -53,7 +59,9 @@ class GameTest(unittest.TestCase):
         response = tester.post('/api/v1/games/',json=data)
         self.assertEqual(response.status_code, 201)
     
+    # Test create a game wrongly
     def test_post_game_wrong(self):
+        # post a string
         data = {
             "guess_limit": "A",
         }
@@ -61,6 +69,7 @@ class GameTest(unittest.TestCase):
         response = tester.post('/api/v1/games/',json=data)
         self.assertEqual(response.status_code, 400)
 
+        # post a negative value
         data = {
             "guess_limit": -7,
         }
@@ -68,6 +77,7 @@ class GameTest(unittest.TestCase):
         response = tester.post('/api/v1/games/',json=data)
         self.assertEqual(response.status_code, 400)
 
+        # post a float value
         data = {
             "guess_limit": 1.5,
         }
@@ -75,6 +85,7 @@ class GameTest(unittest.TestCase):
         response = tester.post('/api/v1/games/',json=data)
         self.assertEqual(response.status_code, 400)
 
+        # post another attribute
         data = {
             "something_else": 2,
         }
@@ -82,7 +93,9 @@ class GameTest(unittest.TestCase):
         response = tester.post('/api/v1/games/',json=data)
         self.assertEqual(response.status_code, 400)
 
+# Unit test for guess view
 class GuessTest(unittest.TestCase):
+    # Create a new game and new guess
     @classmethod
     def setUpClass(cls):
         games.append({
@@ -110,6 +123,7 @@ class GuessTest(unittest.TestCase):
         response = tester.get('/api/v1/games/2/guesses/1/')
         self.assertEqual(response.status_code, 200)
 
+    # Test create a game correctly
     def test_post_guess(self):
         data = {
             "sequence": "BBOO",
@@ -118,7 +132,9 @@ class GuessTest(unittest.TestCase):
         response = tester.post('/api/v1/games/2/guesses/',json=data)
         self.assertEqual(response.status_code, 201)
 
+    # Test create a game wrongly
     def test_post_guess_wrong(self):
+        # post not existed colors
         data = {
             "sequence": "AAAA",
         }
@@ -126,6 +142,7 @@ class GuessTest(unittest.TestCase):
         response = tester.post('/api/v1/games/2/guesses/',json=data)
         self.assertEqual(response.status_code, 400)
 
+        # post 3 characters string
         data = {
             "sequence": "BBB",
         }
@@ -133,6 +150,7 @@ class GuessTest(unittest.TestCase):
         response = tester.post('/api/v1/games/2/guesses/',json=data)
         self.assertEqual(response.status_code, 400)
 
+        # post 5 characters string
         data = {
             "sequence": "BBBBB",
         }
@@ -140,6 +158,7 @@ class GuessTest(unittest.TestCase):
         response = tester.post('/api/v1/games/2/guesses/',json=data)
         self.assertEqual(response.status_code, 400)
 
+        # post another attribute
         data = {
             "something_else": "BBOO",
         }
@@ -147,6 +166,7 @@ class GuessTest(unittest.TestCase):
         response = tester.post('/api/v1/games/2/guesses/',json=data)
         self.assertEqual(response.status_code, 400)
 
+        # post guesses to pass guess limit
         data = {
             "sequence": "BBOO",
         }
@@ -160,5 +180,6 @@ class GuessTest(unittest.TestCase):
         self.assertEqual(response.status_code, 403)
 
 
+# Run tests
 if __name__=="__main__":
     unittest.main()
