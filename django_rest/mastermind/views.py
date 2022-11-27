@@ -61,7 +61,7 @@ class GameView(viewsets.ModelViewSet):
         if serializer.is_valid():
             guess_limit = request.data.get("guess_limit")
             game = Game.objects.create(guess_limit=guess_limit)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({"game":game.id,"data":serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Create guess view, to access all guesses or a given guess inside a game, and to create a new guess
@@ -103,6 +103,6 @@ class GuessView(viewsets.ModelViewSet):
                 game.status = STATUS_CHOICES[1]
             guess.save()
             game.save()
-            return Response(serializer.data, status.HTTP_201_CREATED)
+            return Response({"game":game.id,"guess":guess.id,"data":serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
