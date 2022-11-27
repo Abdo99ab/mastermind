@@ -10,8 +10,8 @@ from mastermind.models import *
 # Given the secret sequence and a guess sequence, we can calculate the number of black pegs (The correct guesses in color and position) and the number of white pegs (The correct guesses in color only).
 # We start by initializing b (black pegs) and w (white pegs) with 0.
 # We create two tables to track down the positions already gone through for secret sequence and guess sequence.
-# We start searching for the black pegs through one loop by incrementing b and adding position to the tracker if the color and position matches.
-# After that, we search for white pegs through two loops, avoiding the positions already gone through by incrementing w and adding both positions to the tracker if the color matches.
+# We start searching for the black pegs through one loop by incrementing b and adding both positions to the tracker if the color and position matches.
+# After that, we search for white pegs through two loops, avoiding the positions already gone through by incrementing w and adding position to the tracker if the color matches
 # Finally we return b and w.
 def mastermind_algo(secret_sequence, guess_sequence):
     b = w = 0
