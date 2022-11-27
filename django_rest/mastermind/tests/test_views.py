@@ -54,7 +54,6 @@ class GameViewTests(APITestCase):
         }
         response = self.client.post(self.games_url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data, data)
     
     # Test create a game wrongly
     def test_post_game_wrong(self):
@@ -118,7 +117,6 @@ class GuessViewTests(APITestCase):
         }
         response = self.client.post(self.guesses_url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data, data)
     
     # Test create a game wrongly
     def test_post_guess_wrong(self):
