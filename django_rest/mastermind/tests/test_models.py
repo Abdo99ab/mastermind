@@ -1,6 +1,7 @@
 from django.test import TestCase
 from mastermind.models import *
 
+# Unit test for Game model
 class GameTest(TestCase):
     def create_game(self,guess_limit=3,sequence="BBBB",status="off"):
         return Game.objects.create(guess_limit=guess_limit,sequence=sequence,status=status)
@@ -12,6 +13,7 @@ class GameTest(TestCase):
         self.assertTrue(isinstance(game.status,str))
         self.assertTrue(isinstance(game.guess_limit,int))
 
+# Unit test for Guess model
 class GuessTest(TestCase):
     def create_game(self,guess_limit=3,sequence="BBBB",status="off"):
         return Game.objects.create(guess_limit=guess_limit,sequence=sequence,status=status)
