@@ -8,22 +8,32 @@ from mastermind.models import *
 
 def mastermind_algo(secret_sequence, guess_sequence):
     b = w = 0
-    gone_through = []
+    gone_through_ss = []
+    gone_through_gs = []
     for i,cs in enumerate(secret_sequence):
         if guess_sequence[i] == cs:
             b+=1
-            gone_through.append(i)
+            gone_through_ss.append(i)
     for i,cs in enumerate(secret_sequence):
-        if i not in gone_through:
+        if i not in gone_through_ss:
             for j,cg in enumerate(guess_sequence):
-                if cs == cg:
-                    gone_through.append(i)
+                if j not in gone_through_gs and cs == cg:
+                    gone_through_gs.append(j)
                     w+=1
+                    break
     return b,w
 
 class StatusView(APIView):
     def get(self, request):
         return Response(STATUS_CHOICES)
+
+class GameStateView(APIView):
+    def get(self, request, pk=None):
+        try:
+            game = Game.objects.get(pk=pk)
+            return Response(game.parsed())
+        except Game.DoesNotExist:
+            return Response({"game":"Game with id {} Does not exist".format(pk)}, status=status.HTTP_400_BAD_REQUEST)
 
 class GameView(viewsets.ModelViewSet):
     queryset = Game.objects.all().annotate(

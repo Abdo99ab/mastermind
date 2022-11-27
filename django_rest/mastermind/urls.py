@@ -11,4 +11,5 @@ urlpatterns = [
     path('', include(router.urls),name="game"),
     path('', include(game_router.urls),name="game-guesses"),
     path('statuses/', StatusView.as_view(), name="statuses"),
+    path('game-state/<int:pk>/', GameStateView.as_view(),name="game-state"),
 ]
