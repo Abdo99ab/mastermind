@@ -85,11 +85,13 @@ class GuessView(viewsets.ModelViewSet):
             if game is None:
                 return Response({"detail":"Not found."}, status=status.HTTP_404_NOT_FOUND)
             # if guess limit reached, the new test can't be accepted we return lost status
+            if game.status == STATUS_CHOICES[2]:
+                return Response({"game":game.id,"data":{"status":game.status}}, status=status.HTTP_403_FORBIDDEN)
             if game.guess_limit - game.current_guess <= 0:
                 if game.status != STATUS_CHOICES[2]:
                     game.status = STATUS_CHOICES[3]
                     game.save()
-                return Response({"status":game.status}, status=status.HTTP_403_FORBIDDEN)
+                return Response({"game":game.id,"data":{"status":game.status}}, status=status.HTTP_403_FORBIDDEN)
             guess = Guess.objects.create(game=game, sequence=sequence)
             guess.black_pegs, guess.white_pegs = mastermind_algo(game.sequence, guess.sequence)
             # if black pegs is 4 we put status as win
