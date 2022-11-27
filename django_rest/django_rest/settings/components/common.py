@@ -2,6 +2,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
