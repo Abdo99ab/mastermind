@@ -19,6 +19,25 @@ class Game(models.Model):
     def __str__(self):
         return str(self.id)
 
+    def parsed(self):
+        guesses = Guess.objects.filter(game=self.pk).order_by('-pk')
+        if len(guesses) == 0:
+            return {
+                "id": self.pk,
+                "guess_limit": self.guess_limit,
+                "status": self.status,
+            }
+        return {
+            "id": self.pk,
+            "guess_limit": self.guess_limit,
+            "status": self.status,
+            "current_guess": len(guesses),
+            "current_guess_id": guesses.first().pk,
+            "current_guess_sequence": guesses.first().sequence,
+            "current_guess_black_pegs": guesses.first().black_pegs,
+            "current_guess_white_pegs": guesses.first().white_pegs,
+        }
+
 class Guess(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     sequence = models.CharField(max_length=4)
