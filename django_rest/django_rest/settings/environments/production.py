@@ -31,7 +31,7 @@ LOGGING = {
     },
 }
 
-MEDIA_ROOT = BASE_DIR / 'mediafiles'
-MEDIA_URL = '/mediafiles/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATIC_URL = '/staticfiles/'
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+STATIC_ROOT = BASE_DIR / 'static'
+STATIC_URL = '/static/'
