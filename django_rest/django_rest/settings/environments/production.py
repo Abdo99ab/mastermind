@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+from django_rest.settings.components.common import BASE_DIR
 load_dotenv()
 
 MY_ENV = 'prod'
@@ -29,3 +30,8 @@ LOGGING = {
         },
     },
 }
+
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
+MEDIA_URL = '/mediafiles/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/staticfiles/'
