@@ -1,12 +1,13 @@
 # Mastermind Django Rest API
 This repository contains a DJANGO REST API for the Mastermind game owned by [Abderrahmane Hammia](mailto:fa_hammia@esi.dz). The project was initially started based on a technical test created by [Inari.io](https://www.inari.io/)
+The project was deployed on pythonanywhere, you can test it via [this link](https://fahammia.pythonanywhere.com/api/v1/docs/)
 # Get Started
 * Make sure you have *docker* and *docker-compose* installed
 * Make the *entrypoint.sh* excutable
 * Create .env file with *DJANGO_ENV* and *SECRET_KEY* variables
 * Run ```docker-compose up --build```
 * Test the endpoints using port 8000
-* The documentation is available at */api/v1/docs*
+* The documentation is available at */api/v1/docs* or online via [this link](https://fahammia.pythonanywhere.com/api/v1/docs/)
 # Content
 ## django_rest folder
 This folder contains configuration files for the project
