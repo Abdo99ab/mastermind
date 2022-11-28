@@ -1,5 +1,5 @@
 from django.contrib import admin
-from mastermind.models import *
+from mastermind.models import Game, Guess
 
 # Register your models here.
 admin.site.register(Game)

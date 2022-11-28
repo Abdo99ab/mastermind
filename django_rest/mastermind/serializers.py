@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from mastermind.models import *
+from mastermind.models import Game, Guess
+from mastermind.utils import COLORS
 
 # Game serializer
 class GameSerializer(serializers.ModelSerializer):

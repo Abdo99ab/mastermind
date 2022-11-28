@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework_nested import routers
 from rest_framework.documentation import include_docs_urls
-from mastermind.views import *
+from mastermind.views import StatusView, GameStateView, GameView, GuessView
 
 # Create default router
 router = routers.DefaultRouter()

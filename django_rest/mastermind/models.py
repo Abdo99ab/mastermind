@@ -1,10 +1,6 @@
 from django.db import models
 import random
-
-# list of colors Blue, Red, Yellow, Green, White, Orange
-COLORS = ["R","B","Y","G","W","O"]
-# list of status
-STATUS_CHOICES = ["off", "ongoing", "won", "lost"]
+from mastermind.utils import STATUS_CHOICES, COLORS
 
 # Game model
 class Game(models.Model):
@@ -15,7 +11,6 @@ class Game(models.Model):
         for _ in range(4):
             result += random.choice(COLORS)
         return result
-
     # Game fields
     sequence = models.CharField(max_length=4,default=create_sequence)
     guess_limit = models.IntegerField()

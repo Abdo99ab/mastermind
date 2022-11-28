@@ -1,5 +1,5 @@
 from django.test import TestCase
-from mastermind.models import *
+from mastermind.models import Game, Guess
 
 # Unit test for Game model
 class GameTest(TestCase):

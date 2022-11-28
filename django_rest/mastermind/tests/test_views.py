@@ -1,6 +1,6 @@
 from django.urls import reverse
 from rest_framework.test import APITestCase
-from mastermind.views import *
+from mastermind.views import Game, Guess
 from rest_framework import status
 
 # Unit test for status view
