@@ -34,6 +34,19 @@ The main endpoint for the api will be */api/v1/*. All available endpoints are ex
 /api/v1/games/{id}/guesses/
 /api/v1/games/{id}/guesses/{id}/
 ```
+Here are the required endpoints description
+```
+1. Create a new game: POST /api/v1/games/
+    Request body
+        guess_limit: must be non null positive integer
+2. Create a new guess: POST /api/v1/games/{game_pk}/guesses/
+    game_pk: ID of the game
+    Request body
+        sequence: must be non null string with 4 characters from [b,y,w,o,r,g]
+3. Get current state of the game: GET /api/v1/game-state/{id}
+    id: ID of the game
+```
+To ensure using the right type and format of request data, validators are being used (inside *serializers.py*)
 ## Unit Tests
 All the unit tests are created using *django.test*
 ```
