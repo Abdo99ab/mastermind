@@ -21,6 +21,7 @@ The mastermind folder contains our rest api app for the mastermind game which ma
 models.py (Game and Guess models)
 serializers.py (Game and Guess serializers)
 views.py (endpoint views)
+utils.py (Domain logic contains set of functions/variables)
 urls.py (endpoint paths)
 tests (testcases)
 ```
