@@ -5,14 +5,8 @@ from mastermind.utils import STATUS_CHOICES, COLORS
 # Game model
 class Game(models.Model):
 
-    # Create the secret sequence with 4 colors
-    def create_sequence():
-        result = ""
-        for _ in range(4):
-            result += random.choice(COLORS)
-        return result
     # Game fields
-    sequence = models.CharField(max_length=4,default=create_sequence)
+    sequence = models.CharField(max_length=4)
     guess_limit = models.IntegerField()
     status = models.CharField(default=STATUS_CHOICES[0],max_length=20)
 
