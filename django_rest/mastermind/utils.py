@@ -34,10 +34,17 @@ def mastermind_algo(secret_sequence, guess_sequence):
                     break
     return b,w
 
+# Create the secret sequence with 4 colors
+def create_sequence():
+    result = ""
+    for _ in range(4):
+        result += random.choice(COLORS)
+    return result
+
 def post_create_game(serializer, guess_limit):
     from mastermind.models import Game
     if serializer.is_valid():
-        game = Game.objects.create(guess_limit=guess_limit)
+        game = Game.objects.create(guess_limit=guess_limit, sequence=create_sequence())
         return Response({"game":game.id,"data":serializer.data}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
