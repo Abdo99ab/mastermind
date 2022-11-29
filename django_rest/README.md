@@ -1,5 +1,4 @@
 # Mastermind Django Rest API
-This repository contains a DJANGO REST API for the Mastermind game owned by [Abderrahmane Hammia](mailto:fa_hammia@esi.dz). The project was initially started based on a technical test created by [Inari.io](https://www.inari.io/)
 The project was deployed on pythonanywhere, you can test it via [this link](https://fahammia.pythonanywhere.com/)
 # Get Started
 * Make sure you have *docker* and *docker-compose* installed
