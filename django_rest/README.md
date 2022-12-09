@@ -1,12 +1,12 @@
 # Mastermind Django Rest API
-The project was deployed on pythonanywhere, you can test it via [this link](https://fahammia.pythonanywhere.com/)
+The project was deployed on pythonanywhere
 # Get Started
 * Make sure you have *docker* and *docker-compose* installed
 * Make the *entrypoint.sh* excutable
 * Create .env file with *DJANGO_ENV* and *SECRET_KEY* variables
 * Run ```docker-compose up --build```
 * Test the endpoints using port 8000
-* The documentation is available at */api/v1/docs* or online via [this link](https://fahammia.pythonanywhere.com/api/v1/docs/)
+* The documentation is available at */api/v1/docs*
 # Content
 ## django_rest folder
 This folder contains configuration files for the project
